@@ -64,7 +64,7 @@ const GameArea = ({ addScore, isRunning }: { addScore: (n: number) => void; isRu
   }, [addScore]);
 
   return (
-    <div className="game-area w-full h-full min-h-[400px] relative select-none">
+    <div className="game-area w-full h-full absolute inset-0 relative select-none">
       {targets.map((t) => (
         <button
           key={t.id}

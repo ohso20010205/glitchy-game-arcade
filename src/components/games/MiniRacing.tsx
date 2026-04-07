@@ -102,7 +102,7 @@ const GameArea = ({ addScore, isRunning }: { addScore: (n: number) => void; isRu
   const laneX = [15, 45, 75]; // percentage positions
 
   return (
-    <div className="game-area w-full h-full min-h-[400px] relative select-none overflow-hidden">
+    <div className="game-area w-full h-full absolute inset-0 relative select-none overflow-hidden">
       {/* Track lanes */}
       <div className="absolute inset-0 flex">
         {[0, 1, 2].map((i) => (

@@ -104,7 +104,7 @@ const GameArea = ({ addScore, isRunning }: { addScore: (n: number) => void; isRu
   const cells = Array.from({ length: GRID_SIZE * GRID_SIZE }, (_, i) => i);
 
   return (
-    <div className="game-area w-full h-full min-h-[400px] flex flex-col items-center justify-center p-4 select-none">
+    <div className="game-area w-full h-full absolute inset-0 flex flex-col items-center justify-center p-4 select-none">
       {isRunning && (
         <>
           <p className="font-pixel text-xs text-muted-foreground mb-2">
