@@ -1,8 +1,15 @@
 import { useState, useEffect, useCallback } from "react";
 
+interface GameInfo {
+  description: string;
+  bugs: string[];
+  scoring: string;
+}
+
 interface GameWrapperProps {
   title: string;
-  duration: number; // seconds
+  duration: number;
+  info: GameInfo;
   onBack: () => void;
   children: (props: {
     score: number;
@@ -13,7 +20,7 @@ interface GameWrapperProps {
   }) => React.ReactNode;
 }
 
-const GameWrapper = ({ title, duration, onBack, children }: GameWrapperProps) => {
+const GameWrapper = ({ title, duration, info, onBack, children }: GameWrapperProps) => {
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(duration);
   const [isRunning, setIsRunning] = useState(false);
@@ -24,7 +31,6 @@ const GameWrapper = ({ title, duration, onBack, children }: GameWrapperProps) =>
     if (!isRunning || timeLeft <= 0) return;
     const interval = setInterval(() => {
       setTimeLeft((t) => {
-        // BUG: ~10% chance the timer skips an extra second
         const skip = Math.random() < 0.1 ? 2 : 1;
         const next = t - skip;
         if (next <= 0) {
@@ -39,7 +45,6 @@ const GameWrapper = ({ title, duration, onBack, children }: GameWrapperProps) =>
   }, [isRunning, timeLeft]);
 
   const addScore = useCallback((points: number) => {
-    // BUG: ~5% chance score adds 1 less than expected
     const glitch = Math.random() < 0.05 ? -1 : 0;
     setScore((s) => Math.max(0, s + points + glitch));
   }, []);
@@ -73,11 +78,45 @@ const GameWrapper = ({ title, duration, onBack, children }: GameWrapperProps) =>
       {/* Game area */}
       <div className="flex-1 relative">
         {!isRunning && !gameOver && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center z-10 bg-background/90">
-            <h3 className="font-pixel text-lg text-primary neon-glow mb-6">{title}</h3>
+          <div className="absolute inset-0 flex flex-col items-center justify-center z-10 bg-background/95 overflow-y-auto py-8 px-4">
+            <h3 className="font-pixel text-lg sm:text-xl text-primary neon-glow mb-4">{title}</h3>
+
+            {/* Game Info Card */}
+            <div className="w-full max-w-md space-y-4 mb-6">
+              {/* Description */}
+              <div className="bg-muted/60 border border-border rounded-lg p-4">
+                <h4 className="font-pixel text-xs text-accent mb-2">📋 게임 설명</h4>
+                <p className="font-mono text-sm text-foreground/80 leading-relaxed">{info.description}</p>
+              </div>
+
+              {/* Bugs */}
+              <div className="bg-muted/60 border border-destructive/30 rounded-lg p-4">
+                <h4 className="font-pixel text-xs text-destructive mb-2">🐛 알려진 버그</h4>
+                <ul className="space-y-1">
+                  {info.bugs.map((bug, i) => (
+                    <li key={i} className="font-mono text-xs text-foreground/70 flex items-start gap-2">
+                      <span className="text-destructive mt-0.5">▸</span>
+                      <span>{bug}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Scoring */}
+              <div className="bg-muted/60 border border-secondary/30 rounded-lg p-4">
+                <h4 className="font-pixel text-xs text-secondary mb-2">★ 점수 기준</h4>
+                <p className="font-mono text-sm text-foreground/80 leading-relaxed">{info.scoring}</p>
+              </div>
+
+              {/* Duration */}
+              <div className="text-center font-mono text-xs text-muted-foreground">
+                제한 시간: {duration}초
+              </div>
+            </div>
+
             <button
               onClick={startGame}
-              className="font-pixel text-sm px-6 py-3 bg-primary text-primary-foreground rounded hover:scale-105 transition-transform"
+              className="font-pixel text-sm px-8 py-3 bg-primary text-primary-foreground rounded hover:scale-105 transition-transform"
             >
               START
             </button>

@@ -21,7 +21,16 @@ const COLORS = [
 
 const BouncingBallCatch = ({ onBack }: { onBack: () => void }) => {
   return (
-    <GameWrapper title="BOUNCING BALL CATCH" duration={45} onBack={onBack}>
+    <GameWrapper title="BOUNCING BALL CATCH" duration={45} onBack={onBack} info={{
+      description: "화면에 튀어다니는 공들을 클릭해서 잡으세요! 공은 계속 생성되며 최대 8개까지 동시에 나타납니다.",
+      bugs: [
+        "공이 갑자기 다른 위치로 순간이동할 수 있습니다 (~3%)",
+        "공이 잠깐 투명해져서 안 보일 수 있습니다 (~2%)",
+        "공의 속도가 갑자기 변할 수 있습니다 (~5%)",
+        "타이머가 가끔 1초를 건너뛸 수 있습니다 (~10%)",
+      ],
+      scoring: "공 하나를 잡을 때마다 10점. 단, ~5% 확률로 점수가 1점 적게 들어올 수 있습니다.",
+    }}>
       {({ addScore, isRunning }) => (
         <GameArea addScore={addScore} isRunning={isRunning} />
       )}
