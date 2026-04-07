@@ -14,7 +14,16 @@ const LABELS = ["CLICK!", "HIT ME", "TAP!", "HERE!", "NOW!", "GO!", "YES!"];
 
 const RandomButtonClick = ({ onBack }: { onBack: () => void }) => {
   return (
-    <GameWrapper title="RANDOM BUTTON CLICK" duration={40} onBack={onBack}>
+    <GameWrapper title="RANDOM BUTTON CLICK" duration={40} onBack={onBack} info={{
+      description: "화면에 랜덤으로 나타나는 버튼을 최대한 빨리 클릭하세요! 버튼은 일정 시간이 지나면 사라집니다.",
+      bugs: [
+        "~20%의 버튼은 마우스를 올리면 위치가 바뀝니다",
+        "~15%의 버튼은 첫 번째 클릭이 무시됩니다",
+        "일부 버튼이 살짝 기울어져 있을 수 있습니다",
+        "타이머가 가끔 1초를 건너뛸 수 있습니다 (~10%)",
+      ],
+      scoring: "버튼 하나를 클릭할 때마다 15점. ~5% 확률로 점수가 1점 적게 들어올 수 있습니다.",
+    }}>
       {({ addScore, isRunning }) => (
         <GameArea addScore={addScore} isRunning={isRunning} />
       )}

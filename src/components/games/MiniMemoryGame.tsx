@@ -15,7 +15,15 @@ type Phase = "showing" | "input" | "result";
 
 const MiniMemoryGame = ({ onBack }: { onBack: () => void }) => {
   return (
-    <GameWrapper title="MINI MEMORY GAME" duration={60} onBack={onBack}>
+    <GameWrapper title="MINI MEMORY GAME" duration={60} onBack={onBack} info={{
+      description: "화면에 표시되는 패턴을 기억한 후 같은 순서로 클릭하세요! 라운드가 올라갈수록 패턴이 길어집니다.",
+      bugs: [
+        "패턴 표시 중 잘못된 칸이 강조될 수 있습니다 (~10%)",
+        "칸이 잠깐 사라질 수 있습니다 (~8%)",
+        "타이머가 가끔 1초를 건너뛸 수 있습니다 (~10%)",
+      ],
+      scoring: "정확한 패턴 재현 시 라운드 × 10점. ~5% 확률로 점수가 1점 적게 들어올 수 있습니다.",
+    }}>
       {({ addScore, isRunning }) => (
         <GameArea addScore={addScore} isRunning={isRunning} />
       )}

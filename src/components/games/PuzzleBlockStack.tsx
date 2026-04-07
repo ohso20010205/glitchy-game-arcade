@@ -20,7 +20,15 @@ const COLORS = [
 
 const PuzzleBlockStack = ({ onBack }: { onBack: () => void }) => {
   return (
-    <GameWrapper title="PUZZLE BLOCK STACK" duration={90} onBack={onBack}>
+    <GameWrapper title="PUZZLE BLOCK STACK" duration={90} onBack={onBack} info={{
+      description: "떨어지는 블록을 클릭해서 쌓으세요! 블록이 좌우로 움직이는 동안 타이밍을 맞춰 떨어뜨려야 합니다.",
+      bugs: [
+        "블록이 떨어질 때 약간 회전할 수 있습니다 (~15%)",
+        "블록의 좌우 위치가 살짝 어긋날 수 있습니다 (~10%)",
+        "타이머가 가끔 1초를 건너뛸 수 있습니다 (~10%)",
+      ],
+      scoring: "블록 하나를 쌓을 때마다 25점. ~5% 확률로 점수가 1점 적게 들어올 수 있습니다.",
+    }}>
       {({ addScore, isRunning }) => (
         <GameArea addScore={addScore} isRunning={isRunning} />
       )}

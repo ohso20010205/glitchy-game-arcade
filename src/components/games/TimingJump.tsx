@@ -10,7 +10,16 @@ interface PlatformObstacle {
 
 const TimingJump = ({ onBack }: { onBack: () => void }) => {
   return (
-    <GameWrapper title="TIMING JUMP" duration={45} onBack={onBack}>
+    <GameWrapper title="TIMING JUMP" duration={45} onBack={onBack} info={{
+      description: "화면을 클릭해서 다가오는 장애물을 점프로 넘으세요! 타이밍이 핵심입니다.",
+      bugs: [
+        "점프 높이가 랜덤으로 달라질 수 있습니다 (~15%)",
+        "클릭 후 점프 반응이 지연될 수 있습니다 (~10%)",
+        "장애물 속도가 갑자기 변할 수 있습니다",
+        "타이머가 가끔 1초를 건너뛸 수 있습니다 (~10%)",
+      ],
+      scoring: "장애물을 넘을 때마다 10점. ~5% 확률로 점수가 1점 적게 들어올 수 있습니다.",
+    }}>
       {({ addScore, isRunning }) => (
         <GameArea addScore={addScore} isRunning={isRunning} />
       )}

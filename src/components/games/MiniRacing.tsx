@@ -10,7 +10,16 @@ interface Obstacle {
 
 const MiniRacing = ({ onBack }: { onBack: () => void }) => {
   return (
-    <GameWrapper title="MINI RACING" duration={60} onBack={onBack}>
+    <GameWrapper title="MINI RACING" duration={60} onBack={onBack} info={{
+      description: "방향키(↑↓)로 차선을 변경하며 장애물을 피하세요! 시간이 지날수록 속도가 빨라집니다.",
+      bugs: [
+        "속도가 갑자기 변할 수 있습니다 (~8%)",
+        "장애물이 깜빡이거나 사라질 수 있습니다 (~5%)",
+        "차선 변경이 살짝 지연될 수 있습니다",
+        "타이머가 가끔 1초를 건너뛸 수 있습니다 (~10%)",
+      ],
+      scoring: "장애물을 피할 때마다 10점. ~5% 확률로 점수가 1점 적게 들어올 수 있습니다.",
+    }}>
       {({ addScore, isRunning }) => (
         <GameArea addScore={addScore} isRunning={isRunning} />
       )}
