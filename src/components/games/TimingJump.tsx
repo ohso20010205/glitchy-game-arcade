@@ -123,7 +123,7 @@ const GameArea = ({ addScore, isRunning }: { addScore: (n: number) => void; isRu
 
   return (
     <div
-      className="game-area w-full h-full min-h-[400px] relative select-none cursor-pointer"
+      className="game-area w-full h-full absolute inset-0 relative select-none cursor-pointer"
       onClick={jump}
     >
       {/* Ground line */}
