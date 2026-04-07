@@ -52,7 +52,7 @@ const GameWrapper = ({ title, duration, onBack, children }: GameWrapperProps) =>
   }, [duration]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background scanline-overlay">
+    <div className="h-screen flex flex-col bg-background scanline-overlay overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between p-3 border-b border-border bg-muted/50">
         <button
