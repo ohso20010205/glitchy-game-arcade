@@ -1,3 +1,13 @@
-# Welcome to your Lovable project
-
-TODO: Document your project here
+2026.04.07(화) 현재 수정사항
+ - Bouncing ball  -> 현재 처음부터 개판임 -> 초반에 천천히, 점수에 따라(등급에 따라) 하드난이도로      바꾸도록 수정
+ - button click -> 수정사항 없음
+ - block stack -> 화면 스크롤 필요, 칸 안먹음-> 화면 스크롤 통해서 위에 보이도록
+ - Mini Racing -> Drop block 양 많이,  피하는 칸 많이
+ - Timing Jump 빼버려, 다른게임으로 수정
+ - Memory Game -> 점수에 따라 or 남은 시간에 따라/ 점점 빨라지게
+추가 게임들은 6~10개정도 더 넣으면 될듯?
+한달마다 유저들 기록 초기화. 명예의 전당에 1~3 등록.
+추가로 아침 9시마다 프로젝트 1~2시간 구현.
+차후 계획
+1. DB로 유저점수 저장 가능한지
+2. 게임 select 및 기존게임 수정.
