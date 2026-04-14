@@ -65,22 +65,16 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-mono);
-<<<<<<< HEAD
+
     overflow: hidden;
-=======
->>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
+
   }
 }
 
 /* Glitch / scanline effects */
 @keyframes scanline {
-<<<<<<< HEAD
-  0% { top: -4px; }
-  100% { top: 100vh; }
-=======
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100vh); }
->>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
 }
 
 @keyframes glitch-shift {
@@ -111,11 +105,8 @@
 .scanline-overlay::after {
   content: '';
   position: fixed;
-<<<<<<< HEAD
+
   top: -4px;
-=======
-  top: 0;
->>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
   left: 0;
   width: 100%;
   height: 4px;
@@ -123,10 +114,7 @@
   animation: scanline 8s linear infinite;
   pointer-events: none;
   z-index: 50;
-<<<<<<< HEAD
   will-change: top;
-=======
->>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
 }
 
 .glitch-text {

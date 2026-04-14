@@ -13,7 +13,6 @@ interface Ball {
 }
 
 const COLORS = [
-<<<<<<< HEAD
   "hsl(120 100% 50%)",
   "hsl(300 100% 60%)",
   "hsl(180 100% 50%)",
@@ -22,54 +21,83 @@ const COLORS = [
   "hsl(60 100% 50%)",
 ];
 
-/** 점수에 따른 등급 계산 */
-function getGrade(score: number): { label: string; color: string; speedMult: number; maxBalls: number; spawnMs: number } {
-  if (score >= 200) return { label: "💀 INSANE",  color: "hsl(0 100% 60%)",   speedMult: 4.5, maxBalls: 14, spawnMs: 600 };
-  if (score >= 120) return { label: "🔴 EXPERT",  color: "hsl(0 80% 55%)",    speedMult: 3.0, maxBalls: 12, spawnMs: 750 };
-  if (score >= 60)  return { label: "🟡 HARD",    color: "hsl(45 100% 55%)",  speedMult: 2.0, maxBalls: 10, spawnMs: 900 };
-  if (score >= 20)  return { label: "🔵 NORMAL",  color: "hsl(210 90% 55%)",  speedMult: 1.3, maxBalls: 8,  spawnMs: 1100 };
-  return              { label: "🟢 BEGINNER", color: "hsl(120 100% 50%)", speedMult: 0.7, maxBalls: 5,  spawnMs: 1500 };
+function getGrade(score: number): {
+  label: string;
+  color: string;
+  speedMult: number;
+  maxBalls: number;
+  spawnMs: number;
+} {
+  if (score >= 200) {
+    return {
+      label: "💀 INSANE",
+      color: "hsl(0 100% 60%)",
+      speedMult: 4.5,
+      maxBalls: 14,
+      spawnMs: 600,
+    };
+  }
+  if (score >= 120) {
+    return {
+      label: "🔴 EXPERT",
+      color: "hsl(0 80% 55%)",
+      speedMult: 3.0,
+      maxBalls: 12,
+      spawnMs: 750,
+    };
+  }
+  if (score >= 60) {
+    return {
+      label: "🟡 HARD",
+      color: "hsl(45 100% 55%)",
+      speedMult: 2.0,
+      maxBalls: 10,
+      spawnMs: 900,
+    };
+  }
+  if (score >= 20) {
+    return {
+      label: "🔵 NORMAL",
+      color: "hsl(210 90% 55%)",
+      speedMult: 1.3,
+      maxBalls: 8,
+      spawnMs: 1100,
+    };
+  }
+  return {
+    label: "🟢 BEGINNER",
+    color: "hsl(120 100% 50%)",
+    speedMult: 0.7,
+    maxBalls: 5,
+    spawnMs: 1500,
+  };
 }
 
 const BouncingBallCatch = ({ onBack }: { onBack: () => void }) => {
   return (
-    <GameWrapper title="BOUNCING BALL CATCH" duration={45} onBack={onBack} info={{
-      description: "화면에 튀어다니는 공들을 클릭해서 잡으세요! 점수가 오를수록 공이 빨라지고 많아집니다.",
-=======
-  "hsl(120 100% 50%)", // green
-  "hsl(300 100% 60%)", // magenta
-  "hsl(180 100% 50%)", // cyan
-  "hsl(45 100% 55%)",  // yellow
-];
-
-const BouncingBallCatch = ({ onBack }: { onBack: () => void }) => {
-  return (
-    <GameWrapper title="BOUNCING BALL CATCH" duration={45} onBack={onBack} info={{
-      description: "화면에 튀어다니는 공들을 클릭해서 잡으세요! 공은 계속 생성되며 최대 8개까지 동시에 나타납니다.",
->>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
-      bugs: [
-        "공이 갑자기 다른 위치로 순간이동할 수 있습니다 (~3%)",
-        "공이 잠깐 투명해져서 안 보일 수 있습니다 (~2%)",
-        "공의 속도가 갑자기 변할 수 있습니다 (~5%)",
-        "타이머가 가끔 1초를 건너뛸 수 있습니다 (~10%)",
-      ],
-<<<<<<< HEAD
-      scoring: "공 하나를 잡을 때마다 10점. 점수에 따라 난이도가 올라갑니다!",
-    }}>
+    <GameWrapper
+      title="BOUNCING BALL CATCH"
+      duration={45}
+      onBack={onBack}
+      info={{
+        description:
+          "화면에 튀어다니는 공들을 클릭해서 잡으세요! 점수가 오를수록 공이 빨라지고 많아집니다.",
+        bugs: [
+          "공이 갑자기 다른 위치로 순간이동할 수 있습니다 (~3%)",
+          "공이 잠깐 투명해져서 안 보일 수 있습니다 (~2%)",
+          "공의 속도가 갑자기 변할 수 있습니다 (~5%)",
+          "타이머가 가끔 1초를 건너뛸 수 있습니다 (~10%)",
+        ],
+        scoring: "공 하나를 잡을 때마다 10점. 점수에 따라 난이도가 올라갑니다!",
+      }}
+    >
       {({ addScore, isRunning, score }) => (
         <GameArea addScore={addScore} isRunning={isRunning} score={score} />
-=======
-      scoring: "공 하나를 잡을 때마다 10점. 단, ~5% 확률로 점수가 1점 적게 들어올 수 있습니다.",
-    }}>
-      {({ addScore, isRunning }) => (
-        <GameArea addScore={addScore} isRunning={isRunning} />
->>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
       )}
     </GameWrapper>
   );
 };
 
-<<<<<<< HEAD
 const GameArea = ({
   addScore,
   isRunning,
@@ -80,116 +108,75 @@ const GameArea = ({
   score: number;
 }) => {
   const [balls, setBalls] = useState<Ball[]>([]);
-  const frameRef = useRef<number>();
+  const frameRef = useRef<number | null>(null);
   const nextId = useRef(0);
-  const spawnTimerRef = useRef<ReturnType<typeof setInterval>>();
+  const spawnTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const gradeRef = useRef(getGrade(0));
 
-  // 등급 업데이트
   useEffect(() => {
     gradeRef.current = getGrade(score);
   }, [score]);
 
-  // 스폰 타이머: 등급 변하면 재시작
   useEffect(() => {
-    if (!isRunning) { setBalls([]); return; }
-    const grade = gradeRef.current;
+    if (!isRunning) {
+      setBalls([]);
+      if (spawnTimerRef.current) clearInterval(spawnTimerRef.current);
+      return;
+    }
 
-    clearInterval(spawnTimerRef.current);
+    if (spawnTimerRef.current) clearInterval(spawnTimerRef.current);
+
     spawnTimerRef.current = setInterval(() => {
       const g = gradeRef.current;
       setBalls((prev) => {
         if (prev.length >= g.maxBalls) return prev;
+
         const baseSpeed = 0.35 * g.speedMult;
-=======
-const GameArea = ({ addScore, isRunning }: { addScore: (n: number) => void; isRunning: boolean }) => {
-  const [balls, setBalls] = useState<Ball[]>([]);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const frameRef = useRef<number>();
-  const nextId = useRef(0);
-
-  // Spawn balls periodically
-  useEffect(() => {
-    if (!isRunning) { setBalls([]); return; }
-    const spawn = setInterval(() => {
-      setBalls((prev) => {
-        if (prev.length >= 8) return prev;
->>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
-        return [...prev, {
-          id: nextId.current++,
-          x: Math.random() * 80 + 10,
-          y: Math.random() * 80 + 10,
-<<<<<<< HEAD
-          dx: (Math.random() - 0.5) * baseSpeed * 2,
-          dy: (Math.random() - 0.5) * baseSpeed * 2,
-          size: 28 + Math.random() * 16,
-=======
-          dx: (Math.random() - 0.5) * 1.5,
-          dy: (Math.random() - 0.5) * 1.5,
-          size: 30 + Math.random() * 20,
->>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
-          color: COLORS[Math.floor(Math.random() * COLORS.length)],
-          visible: true,
-        }];
+        return [
+          ...prev,
+          {
+            id: nextId.current++,
+            x: Math.random() * 80 + 10,
+            y: Math.random() * 80 + 10,
+            dx: (Math.random() - 0.5) * baseSpeed * 2,
+            dy: (Math.random() - 0.5) * baseSpeed * 2,
+            size: 28 + Math.random() * 16,
+            color: COLORS[Math.floor(Math.random() * COLORS.length)],
+            visible: true,
+          },
+        ];
       });
-<<<<<<< HEAD
-    }, grade.spawnMs);
+    }, gradeRef.current.spawnMs);
 
-    return () => clearInterval(spawnTimerRef.current);
-  }, [isRunning]);
+    return () => {
+      if (spawnTimerRef.current) clearInterval(spawnTimerRef.current);
+    };
+  }, [isRunning, score]);
 
-  // 애니메이션 루프
   useEffect(() => {
     if (!isRunning) return;
+
     const animate = () => {
       const g = gradeRef.current;
+
       setBalls((prev) =>
         prev.map((b) => {
           let { x, y, dx, dy, visible } = b;
-          // 등급에 따라 속도 스케일
+
           x += dx * g.speedMult;
           y += dy * g.speedMult;
+
           if (x < 0 || x > 95) dx = -dx;
           if (y < 0 || y > 90) dy = -dy;
 
-          // BUG: ~3% 순간이동
           if (Math.random() < 0.003) {
             x = Math.random() * 80 + 10;
             y = Math.random() * 80 + 10;
           }
-          // BUG: ~2% 투명화
+
           if (Math.random() < 0.002) visible = !visible;
-          // BUG: ~5% 속도 변화
+
           if (Math.random() < 0.005) {
-=======
-    }, 1200);
-    return () => clearInterval(spawn);
-  }, [isRunning]);
-
-  // Animate balls
-  useEffect(() => {
-    if (!isRunning) return;
-    const animate = () => {
-      setBalls((prev) =>
-        prev.map((b) => {
-          let { x, y, dx, dy, visible } = b;
-          x += dx;
-          y += dy;
-          if (x < 0 || x > 95) dx = -dx;
-          if (y < 0 || y > 90) dy = -dy;
-
-          // BUG: ~3% chance per frame a ball teleports to a random position
-          if (Math.random() < 0.03) {
-            x = Math.random() * 80 + 10;
-            y = Math.random() * 80 + 10;
-          }
-
-          // BUG: ~2% chance ball becomes invisible briefly
-          if (Math.random() < 0.02) visible = !visible;
-
-          // BUG: ~5% chance speed randomly changes
-          if (Math.random() < 0.05) {
->>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
             dx *= 0.5 + Math.random() * 1.5;
             dy *= 0.5 + Math.random() * 1.5;
           }
@@ -197,36 +184,42 @@ const GameArea = ({ addScore, isRunning }: { addScore: (n: number) => void; isRu
           return { ...b, x, y, dx, dy, visible };
         })
       );
+
       frameRef.current = requestAnimationFrame(animate);
     };
+
     frameRef.current = requestAnimationFrame(animate);
-    return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
+
+    return () => {
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    };
   }, [isRunning]);
 
-  const catchBall = useCallback((id: number) => {
-    setBalls((prev) => prev.filter((b) => b.id !== id));
-    addScore(10);
-  }, [addScore]);
+  const catchBall = useCallback(
+    (id: number) => {
+      setBalls((prev) => prev.filter((b) => b.id !== id));
+      addScore(10);
+    },
+    [addScore]
+  );
 
-<<<<<<< HEAD
   const grade = getGrade(score);
 
   return (
     <div className="game-area w-full h-full absolute inset-0 relative select-none cursor-crosshair">
-      {/* 등급 표시 */}
       {isRunning && (
         <div
           className="absolute top-2 right-2 font-pixel text-[10px] px-2 py-1 rounded z-10"
-          style={{ color: grade.color, border: `1px solid ${grade.color}`, background: "hsl(240 10% 6% / 0.8)" }}
+          style={{
+            color: grade.color,
+            border: `1px solid ${grade.color}`,
+            background: "hsl(240 10% 6% / 0.8)",
+          }}
         >
           {grade.label}
         </div>
       )}
 
-=======
-  return (
-    <div ref={containerRef} className="game-area w-full h-full absolute inset-0 relative select-none cursor-crosshair">
->>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
       {balls.map((ball) => (
         <div
           key={ball.id}
@@ -244,6 +237,7 @@ const GameArea = ({ addScore, isRunning }: { addScore: (n: number) => void; isRu
           }}
         />
       ))}
+
       {!isRunning && balls.length === 0 && (
         <div className="flex items-center justify-center h-full font-mono text-muted-foreground text-sm">
           Click the bouncing balls to catch them!
