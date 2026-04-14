@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
+<<<<<<< HEAD
 // ===== 명예의 전당 타입 & 유틸 =====
 
 export interface HallEntry {
@@ -46,6 +47,8 @@ export function saveToHallOfFame(gameTitle: string, entry: HallEntry): boolean {
 
 // ===== 컴포넌트 =====
 
+=======
+>>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
 interface GameInfo {
   description: string;
   bugs: string[];
@@ -66,14 +69,18 @@ interface GameWrapperProps {
   }) => React.ReactNode;
 }
 
+<<<<<<< HEAD
 const MEDAL = ["🥇", "🥈", "🥉"];
 
+=======
+>>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
 const GameWrapper = ({ title, duration, info, onBack, children }: GameWrapperProps) => {
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(duration);
   const [isRunning, setIsRunning] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
+<<<<<<< HEAD
   // 닉네임: 전체 공통 (localStorage)
   const [nickname, setNickname] = useState(() => localStorage.getItem("buggy_nickname") || "");
   const [nicknameInput, setNicknameInput] = useState("");
@@ -84,6 +91,9 @@ const GameWrapper = ({ title, duration, info, onBack, children }: GameWrapperPro
   const [rankResult, setRankResult] = useState<{ made: boolean; rank: number } | null>(null);
 
   // 타이머 (BUG: ~10% 1초 건너뜀)
+=======
+  // Glitch: timer occasionally skips a second
+>>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
   useEffect(() => {
     if (!isRunning || timeLeft <= 0) return;
     const interval = setInterval(() => {
@@ -101,6 +111,7 @@ const GameWrapper = ({ title, duration, info, onBack, children }: GameWrapperPro
     return () => clearInterval(interval);
   }, [isRunning, timeLeft]);
 
+<<<<<<< HEAD
   // 게임 오버 → 해당 게임 명예의 전당에 저장 & 목록 로드
   useEffect(() => {
     if (!gameOver) return;
@@ -122,6 +133,8 @@ const GameWrapper = ({ title, duration, info, onBack, children }: GameWrapperPro
     }
   }, [gameOver]); // eslint-disable-line react-hooks/exhaustive-deps
 
+=======
+>>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
   const addScore = useCallback((points: number) => {
     const glitch = Math.random() < 0.05 ? -1 : 0;
     setScore((s) => Math.max(0, s + points + glitch));
@@ -132,6 +145,7 @@ const GameWrapper = ({ title, duration, info, onBack, children }: GameWrapperPro
     setTimeLeft(duration);
     setGameOver(false);
     setIsRunning(true);
+<<<<<<< HEAD
     setRankResult(null);
   }, [duration]);
 
@@ -157,10 +171,30 @@ const GameWrapper = ({ title, duration, info, onBack, children }: GameWrapperPro
         <h2 className="font-pixel text-xs sm:text-sm text-foreground glitch-text truncate mx-2">{title}</h2>
         <div className="flex gap-3 font-mono text-sm">
           <span style={{ color: timerColor }}>⏱ {timeLeft}s</span>
+=======
+  }, [duration]);
+
+  return (
+    <div className="h-screen flex flex-col bg-background scanline-overlay overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center justify-between p-3 border-b border-border bg-muted/50">
+        <button
+          onClick={onBack}
+          className="font-pixel text-xs text-foreground hover:text-primary transition-colors"
+        >
+          ← MENU
+        </button>
+        <h2 className="font-pixel text-xs sm:text-sm text-foreground glitch-text truncate mx-2">
+          {title}
+        </h2>
+        <div className="flex gap-4 font-mono text-sm">
+          <span className="text-accent">⏱ {timeLeft}s</span>
+>>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
           <span className="text-secondary">★ {score}</span>
         </div>
       </div>
 
+<<<<<<< HEAD
       {/* 게임 영역 */}
       <div className="flex-1 relative min-h-0">
 
@@ -295,6 +329,73 @@ const GameWrapper = ({ title, duration, info, onBack, children }: GameWrapperPro
                   MENU
                 </button>
               </div>
+=======
+      {/* Game area */}
+      <div className="flex-1 relative">
+        {!isRunning && !gameOver && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center z-10 bg-background/95 overflow-y-auto py-8 px-4">
+            <h3 className="font-pixel text-lg sm:text-xl text-primary neon-glow mb-4">{title}</h3>
+
+            {/* Game Info Card */}
+            <div className="w-full max-w-md space-y-4 mb-6">
+              {/* Description */}
+              <div className="bg-muted/60 border border-border rounded-lg p-4">
+                <h4 className="font-pixel text-xs text-accent mb-2">📋 게임 설명</h4>
+                <p className="font-mono text-sm text-foreground/80 leading-relaxed">{info.description}</p>
+              </div>
+
+              {/* Bugs */}
+              <div className="bg-muted/60 border border-destructive/30 rounded-lg p-4">
+                <h4 className="font-pixel text-xs text-destructive mb-2">🐛 알려진 버그</h4>
+                <ul className="space-y-1">
+                  {info.bugs.map((bug, i) => (
+                    <li key={i} className="font-mono text-xs text-foreground/70 flex items-start gap-2">
+                      <span className="text-destructive mt-0.5">▸</span>
+                      <span>{bug}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Scoring */}
+              <div className="bg-muted/60 border border-secondary/30 rounded-lg p-4">
+                <h4 className="font-pixel text-xs text-secondary mb-2">★ 점수 기준</h4>
+                <p className="font-mono text-sm text-foreground/80 leading-relaxed">{info.scoring}</p>
+              </div>
+
+              {/* Duration */}
+              <div className="text-center font-mono text-xs text-muted-foreground">
+                제한 시간: {duration}초
+              </div>
+            </div>
+
+            <button
+              onClick={startGame}
+              className="font-pixel text-sm px-8 py-3 bg-primary text-primary-foreground rounded hover:scale-105 transition-transform"
+            >
+              START
+            </button>
+          </div>
+        )}
+
+        {gameOver && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center z-10 bg-background/90">
+            <h3 className="font-pixel text-lg text-destructive glitch-text mb-2">GAME OVER</h3>
+            <p className="font-pixel text-sm text-secondary mb-6">Score: {score}</p>
+            <div className="flex gap-3">
+              <button
+                onClick={startGame}
+                className="font-pixel text-xs px-4 py-2 bg-primary text-primary-foreground rounded"
+              >
+                RETRY
+              </button>
+              <button
+                onClick={onBack}
+                className="font-pixel text-xs px-4 py-2 bg-muted text-foreground rounded border border-border"
+              >
+                MENU
+              </button>
+>>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
             </div>
           </div>
         )}
@@ -305,6 +406,7 @@ const GameWrapper = ({ title, duration, info, onBack, children }: GameWrapperPro
   );
 };
 
+<<<<<<< HEAD
 // ── 시작 전 화면용 미니 명예의 전당 패널 ──
 function HofPanel({ title }: { title: string }) {
   const list = loadHallOfFame(title);
@@ -332,4 +434,6 @@ function HofPanel({ title }: { title: string }) {
   );
 }
 
+=======
+>>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
 export default GameWrapper;

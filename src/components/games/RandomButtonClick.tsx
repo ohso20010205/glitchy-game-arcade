@@ -8,7 +8,10 @@ interface ClickTarget {
   label: string;
   glitchShift: boolean; // BUG: button shifts position on hover
   failClick: boolean;   // BUG: first click doesn't register
+<<<<<<< HEAD
   rotation: number;     // BUG: some buttons are slightly rotated (computed once at spawn)
+=======
+>>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
 }
 
 const LABELS = ["CLICK!", "HIT ME", "TAP!", "HERE!", "NOW!", "GO!", "YES!"];
@@ -42,18 +45,27 @@ const GameArea = ({ addScore, isRunning }: { addScore: (n: number) => void; isRu
     const spawn = setInterval(() => {
       setTargets((prev) => {
         if (prev.length >= 5) return prev;
+<<<<<<< HEAD
         const isGlitch = Math.random() < 0.2;
+=======
+>>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
         return [...prev, {
           id: nextId.current++,
           x: Math.random() * 75 + 5,
           y: Math.random() * 75 + 5,
           label: LABELS[Math.floor(Math.random() * LABELS.length)],
           // BUG: ~20% of buttons shift position when hovered
+<<<<<<< HEAD
           glitchShift: isGlitch,
           // BUG: ~15% of buttons don't register first click
           failClick: Math.random() < 0.15,
           // BUG: rotation computed ONCE at spawn, not every render
           rotation: isGlitch ? Math.random() * 10 - 5 : 0,
+=======
+          glitchShift: Math.random() < 0.2,
+          // BUG: ~15% of buttons don't register first click
+          failClick: Math.random() < 0.15,
+>>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
         }];
       });
     }, 800);
@@ -94,8 +106,13 @@ const GameArea = ({ addScore, isRunning }: { addScore: (n: number) => void; isRu
           style={{
             left: `${t.x}%`,
             top: `${t.y}%`,
+<<<<<<< HEAD
             // BUG: rotation value computed once at spawn (not every render)
             transform: t.rotation !== 0 ? `rotate(${t.rotation}deg)` : undefined,
+=======
+            // BUG: some buttons have glitchy rotation
+            transform: t.glitchShift ? `rotate(${Math.random() * 10 - 5}deg)` : undefined,
+>>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
           }}
         >
           {t.label}
