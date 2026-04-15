@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# Welcome to your Lovable project
-
-TODO: Document your project here
-=======
 2026.04.07(화) 현재 수정사항
  - Bouncing ball  -> 현재 처음부터 개판임 -> 초반에 천천히, 점수에 따라(등급에 따라) 하드난이도로      바꾸도록 수정
  - button click -> 수정사항 없음
@@ -16,4 +11,4 @@ TODO: Document your project here
 차후 계획
 1. DB로 유저점수 저장 가능한지
 2. 게임 select 및 기존게임 수정.
->>>>>>> 62fe8d59eafef97e2e83a8b578ec8a2e8f613abe
+
