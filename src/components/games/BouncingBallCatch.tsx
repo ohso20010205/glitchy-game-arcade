@@ -223,8 +223,11 @@ const GameArea = ({
       {balls.map((ball) => (
         <div
           key={ball.id}
-          onClick={() => catchBall(ball.id)}
-          className="absolute rounded-full transition-opacity duration-100"
+          onPointerDown={(e) => {
+            e.stopPropagation();
+            catchBall(ball.id);
+          }}
+          className="absolute rounded-full"
           style={{
             left: `${ball.x}%`,
             top: `${ball.y}%`,
@@ -232,8 +235,11 @@ const GameArea = ({
             height: ball.size,
             backgroundColor: ball.color,
             opacity: ball.visible ? 1 : 0,
-            boxShadow: `0 0 10px ${ball.color}`,
+            boxShadow: `0 0 12px ${ball.color}`,
             cursor: "pointer",
+            zIndex: 10,
+            transform: "translate(-50%, -50%)",
+            touchAction: "none",
           }}
         />
       ))}

@@ -57,6 +57,7 @@ const GameArea = ({
   const [currentWidth, setCurrentWidth] = useState(60);
   const nextId = useRef(0);
   const stackScrollRef = useRef<HTMLDivElement | null>(null);
+  const isDropping = useRef(false);
 
   useEffect(() => {
     if (stackScrollRef.current) {
@@ -86,6 +87,12 @@ const GameArea = ({
 
   const dropBlock = useCallback(() => {
     if (!isRunning) return;
+    if (isDropping.current) return;
+
+    isDropping.current = true;
+    setTimeout(() => {
+      isDropping.current = false;
+    }, 300);
 
     const rotation = Math.random() < 0.15 ? Math.random() * 20 - 10 : 0;
     const glitchX = Math.random() < 0.1 ? currentX + (Math.random() * 20 - 10) : currentX;

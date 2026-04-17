@@ -76,6 +76,7 @@ const GameArea = ({
   const [glitchedCells, setGlitchedCells] = useState<Set<number>>(new Set());
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const patternRef = useRef<number[]>([]);
 
   const speed = getShowSpeed(score, timeLeft);
 
@@ -91,6 +92,7 @@ const GameArea = ({
       newPattern.push(cell);
     }
 
+    patternRef.current = newPattern;
     setPattern(newPattern);
     setPlayerInput([]);
     setPhase("showing");
@@ -160,8 +162,8 @@ const GameArea = ({
 
       setTimeout(() => setHighlightIdx(null), 180);
 
-      if (newInput.length === pattern.length) {
-        const correct = newInput.every((v, i) => v === pattern[i]);
+      if (newInput.length === patternRef.current.length) {
+        const correct = newInput.every((v, i) => v === patternRef.current[i]);
 
         if (correct) {
           const pts = 20 + level * 5;
@@ -170,10 +172,7 @@ const GameArea = ({
 
           setLevel((l) => {
             const nl = l + 1;
-            timerRef.current = setTimeout(
-              () => newRound(nl, score + pts, timeLeft),
-              1200
-            );
+            timerRef.current = setTimeout(() => newRound(nl, score + pts, timeLeft), 1200);
             return nl;
           });
         } else {
@@ -193,7 +192,7 @@ const GameArea = ({
         setPhase("result");
       }
     },
-    [phase, isRunning, playerInput, pattern, addScore, level, newRound, score, timeLeft]
+    [phase, isRunning, playerInput, addScore, level, newRound, score, timeLeft]
   );
 
   const cells = Array.from({ length: GRID_SIZE * GRID_SIZE }, (_, i) => i);
@@ -222,10 +221,7 @@ const GameArea = ({
 
           <p className="font-mono text-xs text-accent mb-3">Level: {level}</p>
 
-          <div
-            className="grid gap-2"
-            style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)` }}
-          >
+          <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)` }}>
             {cells.map((idx) => {
               const isHighlighted = highlightIdx === idx;
               const color = COLORS[idx % COLORS.length];

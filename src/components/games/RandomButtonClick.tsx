@@ -9,6 +9,7 @@ interface ClickTarget {
   glitchShift: boolean;
   failClick: boolean;
   rotation: number;
+  size: "sm" | "md" | "lg" | "xl";
 }
 
 const LABELS = ["CLICK!", "HIT ME", "TAP!", "HERE!", "NOW!", "GO!", "YES!"];
@@ -62,6 +63,9 @@ const GameArea = ({
         if (prev.length >= 5) return prev;
 
         const isGlitch = Math.random() < 0.2;
+        const sizeRoll = Math.random();
+        const size =
+          sizeRoll < 0.25 ? "sm" : sizeRoll < 0.55 ? "md" : sizeRoll < 0.8 ? "lg" : "xl";
 
         return [
           ...prev,
@@ -73,6 +77,7 @@ const GameArea = ({
             glitchShift: isGlitch,
             failClick: Math.random() < 0.15,
             rotation: isGlitch ? Math.random() * 10 - 5 : 0,
+            size,
           },
         ];
       });
@@ -102,6 +107,13 @@ const GameArea = ({
     [addScore]
   );
 
+  const sizeStyles: Record<ClickTarget["size"], string> = {
+    sm: "px-2 py-1 text-[9px]",
+    md: "px-4 py-2 text-xs",
+    lg: "px-6 py-3 text-sm",
+    xl: "px-8 py-5 text-base",
+  };
+
   return (
     <div className="game-area w-full h-full absolute inset-0 relative select-none">
       {targets.map((t) => (
@@ -115,7 +127,7 @@ const GameArea = ({
               el.style.top = `${Math.random() * 70 + 5}%`;
             }
           }}
-          className="absolute font-pixel text-xs px-4 py-2 bg-primary text-primary-foreground rounded border-2 border-foreground hover:scale-110 transition-all duration-100 active:scale-95"
+          className={`absolute font-pixel bg-primary text-primary-foreground rounded border-2 border-foreground hover:scale-110 transition-all duration-100 active:scale-95 ${sizeStyles[t.size]}`}
           style={{
             left: `${t.x}%`,
             top: `${t.y}%`,
